@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const PCR = require("puppeteer-chromium-resolver");
 
 
 async function main() {
@@ -15,7 +16,19 @@ async function main() {
 
     }
 
-    const browser = await puppeteer.launch({ headless: true })
+    //const browser = await puppeteer.launch({ headless: true })
+    const options = {};
+    const stats = await PCR(options);
+    const browser = await stats.puppeteer.launch({
+        headless: false,
+        args: ["--no-sandbox"],
+        executablePath: stats.executablePath
+    }).catch(function(error) {
+        console.log(error);
+    });
+
+
+
 
     const page = await browser.newPage();
     console.log("Iniciando...")
