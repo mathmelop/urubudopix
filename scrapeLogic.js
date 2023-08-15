@@ -2,18 +2,7 @@ const puppeteer = require("puppeteer");
 require("dotenv").config();
 
 
-function just(num) {
-  return new Promise((resolve) => setTimeout(resolve, num));
-}
 
-
-async function countElements() {
-  //Retorna o numero de elementos
-  return await page.evaluate(() => {
-    return document.querySelectorAll(`#app > div > div.app-content.content > div.content-wrapper > div.content-body > div > div > div > div`).length;
-  });
-
-}
 
 
 
@@ -58,6 +47,20 @@ const scrapeLogic = async (res) => {
 
     }
     
+    function just(num) {
+      return new Promise((resolve) => setTimeout(resolve, num));
+    }
+    
+    
+    async function countElements() {
+      //Retorna o numero de elementos
+      return await page.evaluate(() => {
+        return document.querySelectorAll(`#app > div > div.app-content.content > div.content-wrapper > div.content-body > div > div > div > div`).length;
+      });
+    
+    }
+
+
     
     async function doTheThing(licenseNumber) {
       console.log("Usando licença: " + licenseNumber)
