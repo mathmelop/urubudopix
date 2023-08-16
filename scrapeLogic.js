@@ -29,8 +29,10 @@ const scrapeLogic = async (res) => {
 
     console.log("Fazendo Login...")
     //await page.type('#login-email', 'wesley_becker302@hotmail.com');
-    await page.type('#login-email', 'matheuskiss97@gmail.com');
-    await page.type('#login-password', 'Teste123');
+    const email = process.env.URUBU_EMAIL
+    const senha = process.env.URUBU_SENHA
+    await page.type('#login-email', email);
+    await page.type('#login-password', senha);
     await page.click('.row.auth-inner.m-0')
     await page.click('.btn >div');
     console.log("Logando...")
