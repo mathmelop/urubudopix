@@ -22,7 +22,7 @@ const scrapeLogic = async (res) => {
   try {
     const page = await browser.newPage();
     console.log("Iniciando...")
-
+    await page.setDefaultNavigationTimeout(0); 
     await page.goto('https://dashboard.1daybot.com/', { cache: 'no-cache' });
 
     // Find elements using XPath
