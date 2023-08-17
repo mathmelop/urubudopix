@@ -1,24 +1,22 @@
 const puppeteer = require("puppeteer");
+const PCR = require("puppeteer-chromium-resolver");
 require("dotenv").config();
 
 
 
-
-
-
 const scrapeLogic = async (res) => {
-  const browser = await puppeteer.launch({
-    args: [
-      "--disable-setuid-sandbox",
-      "--no-sandbox",
-      "--single-process",
-      "--no-zygote",
-    ],
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath(),
-  });
+   //const browser = await puppeteer.launch({ headless: true })
+   const options = {};
+   const stats = await PCR(options);
+   const browser = await stats.puppeteer.launch({
+       headless: false,
+       args: ["--no-sandbox"],
+       executablePath: stats.executablePath
+   }).catch(function(error) {
+       console.log(error);
+   });
+
+  
   try {
     const page = await browser.newPage();
     console.log("Iniciando...")
