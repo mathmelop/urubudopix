@@ -38,6 +38,7 @@ const scrapeLogic = async (res) => {
     console.log("Logando...")
     await page.waitForNavigation()
     console.log("Acessando pagina de arbitragem...")
+    await page.setDefaultNavigationTimeout(0);
     await page.goto('https://dashboard.1daybot.com/manual-arbitration')
 
 
@@ -65,6 +66,7 @@ const scrapeLogic = async (res) => {
 
     
     async function doTheThing(licenseNumber) {
+      await page.setDefaultNavigationTimeout(0);
       console.log("Usando licença: " + licenseNumber)
       firstElement = 3
       let esseehbao = -1
@@ -96,6 +98,7 @@ const scrapeLogic = async (res) => {
         if (i == qtdElements) {
           console.log("Não encontrado, atualizando pagina em 3 segundos...")
           await just(3000);
+          await page.setDefaultNavigationTimeout(0);
           await page.reload()
           await page.waitForSelector(tst)
           i = firstElement
@@ -111,7 +114,7 @@ const scrapeLogic = async (res) => {
 
       }
 
-
+      await page.setDefaultNavigationTimeout(0);
       //Clica no maior e seleciona a licença informada
       console.log(esseehbao)
       let vencedor = esseehbao
