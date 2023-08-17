@@ -22,7 +22,8 @@ const scrapeLogic = async (res) => {
   try {
     const page = await browser.newPage();
     console.log("Iniciando...")
-    await page.setDefaultNavigationTimeout(0); 
+    await page.setDefaultNavigationTimeout(0);
+    await page.setDefaultTimeout(0)
     await page.goto('https://dashboard.1daybot.com/', { cache: 'no-cache' });
 
     // Find elements using XPath
@@ -39,6 +40,7 @@ const scrapeLogic = async (res) => {
     await page.waitForNavigation()
     console.log("Acessando pagina de arbitragem...")
     await page.setDefaultNavigationTimeout(0);
+    await page.setDefaultTimeout(0)
     await page.goto('https://dashboard.1daybot.com/manual-arbitration')
 
 
@@ -67,6 +69,7 @@ const scrapeLogic = async (res) => {
     
     async function doTheThing(licenseNumber) {
       await page.setDefaultNavigationTimeout(0);
+      await page.setDefaultTimeout(0)
       console.log("Usando licença: " + licenseNumber)
       firstElement = 3
       let esseehbao = -1
@@ -99,6 +102,7 @@ const scrapeLogic = async (res) => {
           console.log("Não encontrado, atualizando pagina em 3 segundos...")
           await just(3000);
           await page.setDefaultNavigationTimeout(0);
+          await page.setDefaultTimeout(0)
           await page.reload()
           await page.waitForSelector(tst)
           i = firstElement
@@ -115,6 +119,7 @@ const scrapeLogic = async (res) => {
       }
 
       await page.setDefaultNavigationTimeout(0);
+      await page.setDefaultTimeout(0)
       //Clica no maior e seleciona a licença informada
       console.log(esseehbao)
       let vencedor = esseehbao
@@ -127,7 +132,7 @@ const scrapeLogic = async (res) => {
       await just(100);
       await page.click(licenseBtn);
       
-
+      await page.setDefaultTimeout(0)
       mensagemOk = `html > body > div:nth-of-type(5) > div:first-of-type > div > div > div > div > div:nth-of-type(3) > div`
       await page.waitForSelector(mensagemOk);
       
