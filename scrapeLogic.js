@@ -2,14 +2,14 @@ const puppeteer = require("puppeteer");
 const PCR = require("puppeteer-chromium-resolver");
 require("dotenv").config();
 
-
+e
 
 const scrapeLogic = async (res) => {
    //const browser = await puppeteer.launch({ headless: true })
    const options = {};
    const stats = await PCR(options);
    const browser = await stats.puppeteer.launch({
-       headless: false,
+       headless: true,
        args: ["--no-sandbox"],
        executablePath: stats.executablePath
    }).catch(function(error) {
